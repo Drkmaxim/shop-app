@@ -1,0 +1,45 @@
+.products-page {
+  padding: 40px 6% 64px;
+}
+
+.products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.products-header h1 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.products-clear-filter {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  border: 1px solid #111;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.products-clear-filter:hover {
+  background: #111;
+  color: #fff;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 24px;
+}
+
+.products-empty {
+  color: #666;
+  font-size: 1rem;
+}
