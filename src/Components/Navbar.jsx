@@ -19,7 +19,7 @@ function Navbar() {
         <Link to="/about">About</Link>
         <Link to="/products">Products</Link>
         <Link to="/cart">Cart</Link>
-        <Link to="/contact">Contact</Link>
+        <Link to="/help">Help</Link>
 
         <button className="logout-btn" onClick={handleLogout}>
           Logout
