@@ -48,20 +48,65 @@ const Checkout = () => {
     return newErrors;
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) return;
 
+    try {
+      const orderData = {
+        address: {
+          fullName: address.fullName.trim(),
+          phone: address.phone.trim(),
+          addressLine1: address.addressLine1.trim(),
+          addressLine2: address.addressLine2.trim(),
+          city: address.city.trim(),
+          state: address.state.trim(),
+          pincode: address.pincode.trim(),
+        },
+
+        items: items.map((item) => ({
+          id: String(item.id),
+          name: item.name,
+          price: Number(item.price),
+          quantity: Number(item.quantity),
+        })),
+
+        totalPrice: Number(totalPrice),
+      };
+      console.log("Order Data: ", orderData);
+
+      const response = await fetch("http://localhost:3001/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const message = await response.text();
+      let text;
+      try {
+        text = JSON.parse(message);
+      } catch {
+        text = {message: message || "Server returned invalid response"};
+      }
+      console.log("Response: ", text)
+
+      if(!response.ok) {
+        throw new Error(text.error || text.message || `Server error ${response.status}`);
+      }
     // Order placement logic (API call) can be added here.
-    console.log("Placing order:", { address, items, totalPrice });
+      console.log("Placing order:", { address, items, totalPrice });
 
-    setOrderPlaced(true);
-    dispatch(clearCart());
-  };
-
+      setOrderPlaced(true);
+      dispatch(clearCart());
+    } catch(error) {
+    console.error(error);
+  }
+}
   if (orderPlaced) {
     return (
       <div>

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Perform login logic here
     e.preventDefault();
     setError("");
@@ -31,6 +32,32 @@ function Login() {
   if (!loginData.email.includes("@")) {
     setError("Please enter a valid email address");
   }
+
+    try {
+        setLoading(true);
+        const response = await fetch(
+            "http://localhost:3001/app/login",
+            { method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({
+                email: loginData.email.trim(),
+                password: loginData.password,
+              }),
+            }
+        );
+
+        const data = await response.json();
+        console.log("Response: " + data);
+        if(!response.ok) {
+            setError("Try again later");
+            return;
+        }
+    } catch(error) {
+        console.error("Login Error: " + error);
+        setError("Unable to login");
+    } finally {
+        setLoading(false);
+    }
     console.log("Logging in with email:", loginData.email, "and password:", loginData.password);
 
     navigate("/home");
@@ -54,6 +81,7 @@ function Login() {
           onChange={handleChange} />
         <button type="submit">Login</button>
         </form>
+        <p>New user? <Link to="/register">Register Here</Link></p>
       </div>
     </div>
   );

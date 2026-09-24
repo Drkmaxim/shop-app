@@ -9,7 +9,7 @@ const CategoryCard = ({ category }) => {
   const categoryId = id || _id || name.toLowerCase();
 
   const handleClick = () => {
-    navigate(`/products/category/${categoryId}`);
+    navigate(`/view/products/${categoryId}`);
   };
 
   return (
