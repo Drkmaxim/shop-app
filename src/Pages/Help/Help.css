@@ -1,0 +1,8 @@
+.supportContainer {
+    display: flex;
+    gap: 30px;
+}
+.support, img{
+    width: 40vw;
+    height: 100vh;
+}
