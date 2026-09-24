@@ -36,7 +36,7 @@ function Login() {
     try {
         setLoading(true);
         const response = await fetch(
-            "http://localhost:3001/app/login",
+            "https://shop-app-backend-4ykq.onrender.com/app/login",
             { method: "POST",
               headers: {"Content-Type": "application/json"},
               body: JSON.stringify({

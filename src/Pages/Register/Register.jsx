@@ -40,7 +40,7 @@ function Register() {
     try {
         setLoading(true);
         const response = await fetch(
-            "http://localhost:3001/app/register",
+            "https://shop-app-backend-4ykq.onrender.com/app/register",
             { method: "POST",
               headers: {"Content-Type": "application/json"},
               body: JSON.stringify({

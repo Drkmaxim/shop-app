@@ -78,7 +78,7 @@ const Checkout = () => {
       };
       console.log("Order Data: ", orderData);
 
-      const response = await fetch("http://localhost:3001/checkout", {
+      const response = await fetch("https://shop-app-backend-4ykq.onrender.com/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

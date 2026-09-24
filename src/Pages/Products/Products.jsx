@@ -111,8 +111,8 @@ const Products = () => {
         setError("");
 
         const url = categoryId
-          ? `http://localhost:3001/view/products/${categoryId}`
-          : "http://localhost:3001/view/products";
+          ? `https://shop-app-backend-4ykq.onrender.com/view/products/${categoryId}`
+          : "https://shop-app-backend-4ykq.onrender.com/view/products";
 
         const response = await fetch(url);
 
